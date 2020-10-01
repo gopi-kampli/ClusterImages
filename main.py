@@ -55,7 +55,7 @@ class ClusterImages():
 
         return labels
 
-    #'F:\Pictures\Chuckle\Cluster'
+    
     def cluster_to_folders(self, directory):
         image_directory = directory
 
