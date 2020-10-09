@@ -55,7 +55,7 @@ class ClusterImages():
 
         return labels
 
-    
+
     def cluster_to_folders(self, directory):
         image_directory = directory
 
@@ -92,6 +92,14 @@ class ClusterImages():
             image_name = image_name[image_name.index('\\')+1:]
 
             move(images[i],  save_path+image_name)
+
+
+    def images_found_amount(self, directory):
+        image_directory = directory
+
+        # Getting the number of images in the folder and subfolder
+        images_found = len(list_pictures(image_directory))
+        return images_found
 
 
 if __name__ == "__main__":
