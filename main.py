@@ -22,6 +22,8 @@ class ClusterImages():
         #Loading VGG19 Trained Model
         self.model_vgg19 = VGG19(weights='imagenet', include_top=False)
 
+        self.image_directory = None
+
 
     def _extract_image_features(self, img):
         #Loading Images with three channels and reducing it to target size of 512x512
@@ -57,10 +59,10 @@ class ClusterImages():
 
 
     def cluster_to_folders(self, directory):
-        image_directory = directory
+        self.image_directory = directory
 
         #Getting All ImagePaths in the Directory and Subdirectories
-        images = list_pictures(image_directory)
+        images = list_pictures(self.image_directory)
         flat_features = []
         temp = []
 
@@ -88,17 +90,17 @@ class ClusterImages():
                 os.makedirs(save_path)
 
             image_path = str(images[i])
-            image_name = image_path.replace(image_directory,'')
+            image_name = image_path.replace(self.image_directory,'')
             image_name = image_name[image_name.index('\\')+1:]
 
             move(images[i],  save_path+image_name)
 
 
-    def images_found_amount(self, directory):
-        image_directory = directory
+    def get_images_found_amount(self, directory):
+        self.image_directory = directory
 
         # Getting the number of images in the folder and subfolder
-        images_found = len(list_pictures(image_directory))
+        images_found = len(list_pictures(self.image_directory))
         return images_found
 
 

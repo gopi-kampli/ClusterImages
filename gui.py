@@ -9,6 +9,7 @@ class Application(tk.Tk):
         self.master = master
 
         self.ci = ClusterImages()
+        self.folder = None
 
         self.title("ImageClusterDL")
         self.minsize(640, 400)
@@ -40,20 +41,20 @@ class Application(tk.Tk):
 
 
     def folder_dialog(self):
-        self.filename = filedialog.askdirectory()
+        self.folder = filedialog.askdirectory()
         self.label = ttk.Label(self.labelFrame, text="")
         self.label.grid(column=2, row=1)
-        self.label.configure(text=self.filename,justify='right')
+        self.label.configure(text=self.folder, justify='right')
 
     def scan_images(self):
-        self.images_found = self.ci.images_found_amount(self.filename)
+        self.images_found = self.ci.get_images_found_amount(self.folder)
         self.label = ttk.Label(self.scanFrame, text="")
         self.label.grid(column=2, row=1)
         self.label.configure(text=self.images_found)
 
 
     def seperate_images(self):
-        self.ci.cluster_to_folders(self.filename)
+        self.ci.cluster_to_folders(self.folder)
 
 
 if __name__ == "__main__":
